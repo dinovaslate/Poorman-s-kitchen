@@ -1,716 +1,870 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-    .viewport {
-      padding: 0;
-      width: 400px;
-      height: 300px;
-      position: relative;
-      display: grid;
-      place-items: center;
-      transform: scale(2.2) translateZ(300px);
-    }
-    .table,
-    .wall,
-    .floor,
-    .kitchen-set,
-    .stove,
-    .chair,
-    .fridge,
-    .washer,
-    .keran,
-    .keran-top,
-    .keran-right,
-    .keran-mancur {
-      --box-width: 235px;
-      --box-height: 200px;
-      --depth: 10px;
-      width: var(--box-width);
-      height: var(--box-height);
-      position: absolute;
-    }
-    .piring{
-      aspect-ratio: 1/1;
-      border-radius:50% ;
-      border: 1px solid black;
-      width: 15px;
-      background-color: white;
-      box-shadow: 0 0 0 8px white, 0 0 0 9px black;
-    }
-    .kitchen-set__face--front {
-      background-image: linear-gradient(to left, white 4.5%,  transparent 4.5%, transparent 36.2% , white 25%), linear-gradient(to bottom,  white 23%, transparent 23%, transparent 84.5%, white 84.5%);
-    }
-    .washer{
-      --box-width: 50px;
-      --box-height: 41px;
-      --depth: 13px;
-      inset: 55% 0 0 80%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/-4));
-    }
-    .keran-mancur{
-      --box-width: 3px;
-      --box-height: 3px;
-      --depth: 6px;
-      inset: 70% 0 0 50%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .keran-mancur__face{
-      background: hsl(0, 0%, 40%) !important;
-      border: 0.1px solid black;
-    }
-    .keran-top{
-      --box-width: 6px;
-      --box-height: 20px;
-      --depth: 7px;
-      inset: 140% 0 0 50%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2 + 0.5px));
-    }
-    .keran-right{
-      --box-width: 6px;
-      --box-height: 6px;
-      --depth: 6px;
-      inset: 50% 0 0 70%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .keran-right__face{
-      --width: 100%;
-    }
-    .keran{
-      --box-width: 6px;
-      --box-height: 6px;
-      --depth: 15px;
-      inset: 10% 0 0 80%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-      
-    }
-    .blob{
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70% ;
-      background-color: hsla(193, 76%, 90%, 0.7);
-      aspect-ratio: 1/1;
-      width: 60px;
-      position: absolute;
-      top: 50%;
-      left: 60%;
-     
-    }
-    .blob::after{
-      display: block;
-      content: '';
-      aspect-ratio: 1/1;
-      background-color: hsla(193, 76%, 90%, 0.7);
-      width: 40px;
-      inset: 0 auto auto 0;
-      transform: translate(-50%, -50%);
-      position: absolute;
-      border-radius:64% 36% 41% 59% / 30% 87% 13% 70%  ;
-    }
-    .water{
-      width: 100%;
-      height: 100%;
-      background-color: #d4f1f9;
-      opacity: 0.6;
-      box-shadow: inset 0 0 0 1px;
-      transform: translateZ(-5px);
-    }
-    .keran__face, .keran-top__face, .keran-right__face{
-      border: 0.1px solid black;
-    }
-    
-    .keran-top__face--bottom{
-      background-color: hsl(0, 0%, 70%) !important;
-    }
-    .keran__face--bottom, .keran-right__face--bottom{
-      background-color: hsl(0, 0%, 60%) !important;
-    }
-    .keran__face--front, .keran-top__face--front, .keran-right__face--left, .keran-right__face--front{
-      background-color: hsl(0, 0%, 50%) !important;
-    }
-    .keran__face--left, .keran__face--right, .keran-top__face--left, .keran-top__face--right, .keran-top__face--top{
-      background-color: hsl(0, 0%, 40%) !important;
-    }
-    .washer__face{
-      border: 0.5px solid black !important;
-    }
-    .washer__face--bottom, .washer__face--top{
-      
-      background-image: linear-gradient(to left, black 1%, transparent 1%, transparent 99%, black 99%), linear-gradient(to top, hsl(0, 0%, 70%), hsl(0, 0%, 50%)) !important;
-    }
-    .washer__face--right, .washer__face--left{
-      
-      background-image: linear-gradient(to left, hsl(0, 0%, 70%), hsl(0, 0%, 50%)) !important;
-    }
-    .washer__face--back{
-      background-image: linear-gradient(to top, black 1%, transparent 1%, transparent 99%, black 99%), linear-gradient(to left, black 1%, hsl(0, 0%, 40%) 1%, hsl(0, 0%, 40%) 99%, black 99%) !important;
-      
-    }
-    .washer__face--front{
-      background: transparent !important;
-    }
-    
-    .chair {
-      --box-width: 40px;
-      --box-height: 30px;
-      --depth: 26px;
-      inset: 75% 0 0 35%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .windows {
-      aspect-ratio: 1/1;
-      width: 70px;
-      border-radius: 50%;
-      position: absolute;
-      inset: 28% 0 0 54%;
-      transform: translate(-50%, -50%);
-      border: 1px solid black;
-      box-shadow: inset 0 0 0 3px hsl(21, 84%, 83%), inset 0 0 0 5px black;
-      background-image: linear-gradient(
-          to bottom,
-          transparent 46%,
-          black 46%,
-          black 48%,
-          hsl(21, 84%, 83%) 48%,
-          hsl(21, 84%, 83%) 54%,
-          black 54%,
-          black 56%,
-          transparent 56%
-        ),
-        linear-gradient(
-          to right,
-          transparent 46%,
-          black 46%,
-          black 48%,
-          hsl(21, 84%, 83%) 48%,
-          hsl(21, 84%, 83%) 54%,
-          black 54%,
-          black 56%,
-          transparent 56%
-        );
-    }
-    .stove {
-      --box-width: 80px;
-      --box-height: 48px;
-      --depth: 5px;
-      inset: 50% 0 0 30%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .table {
-      --box-width: 77px;
-      --box-height: 60px;
-      --depth: 40px;
-      inset: 75% 0 0 15%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .kitchen-set {
-      --box-width: 155px;
-      --box-height: 72px;
-      --depth: 80px;
-      inset: 22% 0 0 67%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .fridge{
-      --box-width: 79px;
-      --box-height: 65px;
-      --depth: 140px;
-      inset: 21% 0 0 16%;
-      transform: translate3d(-50%, -50%, calc(var(--depth)/2));
-    }
-    .fridge__face--front{
-      background-color: white;
-    }
-    .fridge__face--right{
-      background-color: hsl(0, 0%, 80%) !important;
-    }
-    .fridge__face--bottom{
-      display: grid;
-      grid-template-rows: 30% 70%;
-      gap: 3px;
-      background-color: hsl(0, 0%, 80%) !important;
-      
-    }
-    .fridge__door{
-      border: 1px solid black;
-      background-color: white;
-      position: relative;
-      display: grid;
-      place-items: center;
-    }
-    .copyright{
-      font-family: 'Bebas Neue', cursive;
-      font-size: 6px;
-      padding: 3px;
-      border: 1px solid black;
-      position: relative;
-    }
-    .copyright::after{
-      display: block;
-      content: '';
-      position: absolute;
-      inset: 0.1px;
-      border: 1px solid rgba(0, 0, 0, 0.8);
-    }
-    .fridge__door::after{
-      display: block;
-      content: '';
-      position: absolute;
-      inset: 50% 10px auto auto;
-      transform: translate(50%, -50%);
-      aspect-ratio: 9/50;
-      width: 2px;
-      background-color: gray;
-      border: 1px solid black;
-    }
-    .kitchen-set__face,
-    .stove__face,
-    .fridge__face {
-      border: 1px solid black;
-    }
-    .grill {
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      width: 15px;
-      background-color: #ec8928;
-      position: relative;
-      box-shadow: 0 0 0 8px hsl(0, 0%, 28%), 0 0 0 9px black;
-    }
-    .grill::after,
-    .grill::before {
-      display: block;
-      content: '';
-      position: absolute;
-      border-radius: 100vw;
-      height: 8px;
-      border: 1px solid black;
-      width: 3px;
-      background-color: hsl(0, 0%, 78%);
-      transform: rotate(-40deg) translate(-4px);
-      bottom: 0;
-      left: 0;
-    }
-    .turner {
-      aspect-ratio: 1/1;
-      border-radius: 50%;
-      width: 3.5px;
-      background-color: black;
-    }
-    .grill::before {
-      inset: 0 0 auto auto;
-      transform: rotate(-40deg) translate(4px);
-    }
-    .stove__face--front,
-    .stove__face--bottom {
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 1fr;
-      place-items: center;
-    }
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+.viewport {
+  padding: 0;
+  width: 400px;
+  height: 300px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  transform: scale(var(--scale)) translateZ(300px);
+}
+.button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-family: "Bebas Neue", cursive;
+  background-color: rgb(207, 192, 167);
+  font-size: 1.8rem;
+  border: 3px solid black;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+.prompt {
+  font-family: "Bebas Neue", cursive;
+  background-color: hsl(37, 29%, 93%);
+  border: 1px solid black;
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  bottom: 85px;
+  right: 10px;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  visibility: hidden;
+  opacity: 0;
+  transition: ease-in-out 500ms;
+}
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background-color: hsl(37, 29%, 73%);
+  outline: none;
+  border: 2px solid black;
+  border-radius: 100vw;
+  position: relative;
+}
+.slider::before {
+  display: block;
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(var(--value) - 2%);
+  background-color: rgba(207, 192, 167, 1);
+  opacity: 0.8;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      rgba(207, 192, 167, 1) 4px
+    ),
+    repeating-linear-gradient(#00000055, #000000);
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 6px;
+  height: 14px;
+  box-shadow: 0 0 0 2px hsl(37, 29%, 53%), 0 0 0 2px black;
+  background-color: orange;
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 2px,
+    orange 2px,
+    orange
+  );
+  background-size: 4px 100%;
+}
+.slider::-moz-range-thumb {
+  appearance: none;
+  width: 6px;
+  height: 14px;
+  box-shadow: 0 0 0 2px hsl(37, 29%, 53%), 0 0 0 2px black;
+  background-color: orange;
+  background-image: linear-gradient(
+    to right,
+    #000000,
+    #000000 2px,
+    orange 2px,
+    orange
+  );
+  background-size: 4px 100%;
+}
+.prompt::before {
+  display: block;
+  content: "";
+  aspect-ratio: 1;
+  width: 15px;
+  background-color: hsl(37, 29%, 93%);
+  position: absolute;
+  transform: rotate(45deg);
+  bottom: -8px;
+  right: 10px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.prompt > input {
+  width: 100%;
+}
+.prompt > label {
+  font-size: 1.2rem;
+}
+.button:hover {
+  background-color: hsl(37, 29%, 63%);
+}
+.button:hover + .prompt,
+.prompt:hover {
+  visibility: visible;
+  opacity: 1;
+}
+.table,
+.wall,
+.floor,
+.kitchen-set,
+.stove,
+.chair,
+.fridge,
+.washer,
+.keran,
+.keran-top,
+.keran-right,
+.keran-mancur {
+  --box-width: 235px;
+  --box-height: 200px;
+  --depth: 10px;
+  width: var(--box-width);
+  height: var(--box-height);
+  position: absolute;
+}
+.piring {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1px solid black;
+  width: 15px;
+  background-color: white;
+  box-shadow: 0 0 0 8px white, 0 0 0 9px black;
+}
+.kitchen-set__face--front {
+  background-image: linear-gradient(
+      to left,
+      white 4.5%,
+      transparent 4.5%,
+      transparent 36.2%,
+      white 25%
+    ),
+    linear-gradient(
+      to bottom,
+      white 23%,
+      transparent 23%,
+      transparent 84.5%,
+      white 84.5%
+    );
+}
+.washer {
+  --box-width: 50px;
+  --box-height: 41px;
+  --depth: 13px;
+  inset: 55% 0 0 80%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / -4));
+}
+.keran-mancur {
+  --box-width: 3px;
+  --box-height: 3px;
+  --depth: 6px;
+  inset: 70% 0 0 50%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.keran-mancur__face {
+  background: hsl(0, 0%, 40%) !important;
+  border: 0.1px solid black;
+}
+.keran-top {
+  --box-width: 6px;
+  --box-height: 20px;
+  --depth: 7px;
+  inset: 140% 0 0 50%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2 + 0.5px));
+}
+.keran-right {
+  --box-width: 6px;
+  --box-height: 6px;
+  --depth: 6px;
+  inset: 50% 0 0 70%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.keran-right__face {
+  --width: 100%;
+}
+.keran {
+  --box-width: 6px;
+  --box-height: 6px;
+  --depth: 15px;
+  inset: 10% 0 0 80%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.blob {
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  background-color: hsla(193, 76%, 90%, 0.7);
+  aspect-ratio: 1/1;
+  width: 60px;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+}
+.blob::after {
+  display: block;
+  content: "";
+  aspect-ratio: 1/1;
+  background-color: hsla(193, 76%, 90%, 0.7);
+  width: 40px;
+  inset: 0 auto auto 0;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 64% 36% 41% 59% / 30% 87% 13% 70%;
+}
+.water {
+  width: 100%;
+  height: 100%;
+  background-color: #d4f1f9;
+  opacity: 0.6;
+  box-shadow: inset 0 0 0 1px;
+  transform: translateZ(-5px);
+}
+.keran__face,
+.keran-top__face,
+.keran-right__face {
+  border: 0.1px solid black;
+}
 
-    .stove__face--front {
-      background-color: #e0e0e0 !important;
-    }
-    .stove__face--bottom,
-    .stove__face--top,
-    .stove__face--left,
-    .stove__face--right {
-      background-color: hsl(0, 0%, 68%) !important;
-    }
-   
-    .kitchen-set__face--bottom {
-      background-color: hsl(23, 54%, 69%) !important ;
-      display: grid;
-      grid-auto-flow: column;
-      grid-auto-columns: 1fr;
-      box-shadow: inset 0 0 0 5px hsl(23, 54%, 49%), inset 0 0 0 6px black;
-    }
-    .kitchen-set__cabinet {
-      border: 1px solid black;
-      position: relative;
-    }
-    .kitchen-set__cabinet::after {
-      display: block;
-      content: '';
-      position: absolute;
-      left: 85%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      background-color: hsl(23, 54%, 49%);
-      border-radius: 50%;
-      aspect-ratio: 1/1;
-      width: 5px;
-      border: 1px solid black;
-    }
+.keran-top__face--bottom {
+  background-color: hsl(0, 0%, 70%) !important;
+}
+.keran__face--bottom,
+.keran-right__face--bottom {
+  background-color: hsl(0, 0%, 60%) !important;
+}
+.keran__face--front,
+.keran-top__face--front,
+.keran-right__face--left,
+.keran-right__face--front {
+  background-color: hsl(0, 0%, 50%) !important;
+}
+.keran__face--left,
+.keran__face--right,
+.keran-top__face--left,
+.keran-top__face--right,
+.keran-top__face--top {
+  background-color: hsl(0, 0%, 40%) !important;
+}
+.washer__face {
+  border: 0.5px solid black !important;
+}
+.washer__face--bottom,
+.washer__face--top {
+  background-image: linear-gradient(
+      to left,
+      black 1%,
+      transparent 1%,
+      transparent 99%,
+      black 99%
+    ),
+    linear-gradient(to top, hsl(0, 0%, 70%), hsl(0, 0%, 50%)) !important;
+}
+.washer__face--right,
+.washer__face--left {
+  background-image: linear-gradient(
+    to left,
+    hsl(0, 0%, 70%),
+    hsl(0, 0%, 50%)
+  ) !important;
+}
+.washer__face--back {
+  background-image: linear-gradient(
+      to top,
+      black 1%,
+      transparent 1%,
+      transparent 99%,
+      black 99%
+    ),
+    linear-gradient(
+      to left,
+      black 1%,
+      hsl(0, 0%, 40%) 1%,
+      hsl(0, 0%, 40%) 99%,
+      black 99%
+    ) !important;
+}
+.washer__face--front {
+  background: transparent !important;
+}
 
-    .wall,
-    .floor {
-      border: 1px solid black;
-    }
-    .room {
-      --room-width: 235px;
-      --room-height: 200px;
-      --room-depth: 190px;
-      width: var(--room-width);
-      height: var(--room-height);
-      position: relative;
-      transform: rotateY(-45deg);
-      /* animation: room 4s infinite; */
-    }
+.chair {
+  --box-width: 40px;
+  --box-height: 30px;
+  --depth: 26px;
+  inset: 75% 0 0 35%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.windows {
+  aspect-ratio: 1/1;
+  width: 70px;
+  border-radius: 50%;
+  position: absolute;
+  inset: 28% 0 0 54%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  box-shadow: inset 0 0 0 3px hsl(21, 84%, 83%), inset 0 0 0 5px black;
+  background-image: linear-gradient(
+      to bottom,
+      transparent 46%,
+      black 46%,
+      black 48%,
+      hsl(21, 84%, 83%) 48%,
+      hsl(21, 84%, 83%) 54%,
+      black 54%,
+      black 56%,
+      transparent 56%
+    ),
+    linear-gradient(
+      to right,
+      transparent 46%,
+      black 46%,
+      black 48%,
+      hsl(21, 84%, 83%) 48%,
+      hsl(21, 84%, 83%) 54%,
+      black 54%,
+      black 56%,
+      transparent 56%
+    );
+}
+.stove {
+  --box-width: 80px;
+  --box-height: 48px;
+  --depth: 5px;
+  inset: 50% 0 0 30%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.table {
+  --box-width: 77px;
+  --box-height: 60px;
+  --depth: 40px;
+  inset: 75% 0 0 15%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.kitchen-set {
+  --box-width: 155px;
+  --box-height: 72px;
+  --depth: 80px;
+  inset: 22% 0 0 67%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.fridge {
+  --box-width: 79px;
+  --box-height: 65px;
+  --depth: 140px;
+  inset: 21% 0 0 16%;
+  transform: translate3d(-50%, -50%, calc(var(--depth) / 2));
+}
+.fridge__face--front {
+  background-color: white;
+}
+.fridge__face--right {
+  background-color: hsl(0, 0%, 80%) !important;
+}
+.fridge__face--bottom {
+  display: grid;
+  grid-template-rows: 30% 70%;
+  gap: 3px;
+  background-color: hsl(0, 0%, 80%) !important;
+}
+.fridge__door {
+  border: 1px solid black;
+  background-color: white;
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+.copyright {
+  font-family: "Bebas Neue", cursive;
+  font-size: 6px;
+  padding: 3px;
+  border: 1px solid black;
+  position: relative;
+}
+.copyright::after {
+  display: block;
+  content: "";
+  position: absolute;
+  inset: 0.1px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+}
+.fridge__door::after {
+  display: block;
+  content: "";
+  position: absolute;
+  inset: 50% 10px auto auto;
+  transform: translate(50%, -50%);
+  aspect-ratio: 9/50;
+  width: 2px;
+  background-color: gray;
+  border: 1px solid black;
+}
+.kitchen-set__face,
+.stove__face,
+.fridge__face {
+  border: 1px solid black;
+}
+.grill {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  width: 15px;
+  background-color: #ec8928;
+  position: relative;
+  box-shadow: 0 0 0 8px hsl(0, 0%, 28%), 0 0 0 9px black;
+}
+.grill::after,
+.grill::before {
+  display: block;
+  content: "";
+  position: absolute;
+  border-radius: 100vw;
+  height: 8px;
+  border: 1px solid black;
+  width: 3px;
+  background-color: hsl(0, 0%, 78%);
+  transform: rotate(-40deg) translate(-4px);
+  bottom: 0;
+  left: 0;
+}
+.turner {
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  width: 3.5px;
+  background-color: black;
+}
+.grill::before {
+  inset: 0 0 auto auto;
+  transform: rotate(-40deg) translate(4px);
+}
+.stove__face--front,
+.stove__face--bottom {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  place-items: center;
+}
 
-    .table__face--bottom,
-    .table__face--top,
-    .table__face--left,
-    .table__face--right,
-    .chair__face--bottom,
-    .chair__face--top,
-    .chair__face--left,
-    .chair__face--right {
-      --direction: right;
-      --border: 1px;
-      --color: hsl(21, 84%, 43%);
-      background: transparent !important;
-      background-image: linear-gradient(
-        to var(--direction),
-        var(--color) 10%,
-        black 10%,
-        black 11%,
-        transparent 11%,
-        transparent 90%,
-        black 90%,
-        black 91%,
-        var(--color) 91%
-      ) !important;
-      border: var(--border) solid black;
-    }
-    .chair__face--bottom,
-    .chair__face--top,
-    .chair__face--left,
-    .chair__face--right {
-      --border: 0.5px;
-      --color: hsl(21, 84%, 23%);
-    }
-    .table__face--left,
-    .table__face--right,
-    .chair__face--left,
-    .chair__face--right {
-      --direction: bottom;
-    }
-    .table__face--front,
-    .chair__face--front {
-      background: hsl(21, 84%, 83%);
-      border: 2px solid black;
-      transform: translateZ(calc(var(--depth) / 2));
-      display: grid;
-      place-items: center;
-    }
-    .chair__face--front {
-      background: hsl(21, 84%, 63%);
-    }
-    .table__face--back {
-      background: black;
-      filter: blur(1px);
-      transform: translateZ(-20px);
-    }
-    .box {
-      aspect-ratio: 10/9;
-      width: 60px;
-      background: black;
-      position: relative;
-      transform: translateZ(10px);
-      box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.5);
-      margin-top: -70px;
-      margin-left: -70px;
-    }
-    .box::before {
-      display: block;
-      content: '';
-      position: absolute;
-      background-color: #4158d0;
-      background-image: linear-gradient(
-        43deg,
-        #4158d0 0%,
-        #c850c0 46%,
-        #ffcc70 100%
-      );
+.stove__face--front {
+  background-color: #e0e0e0 !important;
+}
+.stove__face--bottom,
+.stove__face--top,
+.stove__face--left,
+.stove__face--right {
+  background-color: hsl(0, 0%, 68%) !important;
+}
 
-      filter: blur(10px);
-      inset: -10px;
-      z-index: -1;
-      transform: translateZ(-5px);
-    }
+.kitchen-set__face--bottom {
+  background-color: hsl(23, 54%, 69%) !important ;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  box-shadow: inset 0 0 0 5px hsl(23, 54%, 49%), inset 0 0 0 6px black;
+}
+.kitchen-set__cabinet {
+  border: 1px solid black;
+  position: relative;
+}
+.kitchen-set__cabinet::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 85%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: hsl(23, 54%, 49%);
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+  width: 5px;
+  border: 1px solid black;
+}
 
-    * {
-      transform-style: preserve-3d;
-    }
-    body {
-      background: white;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      display: grid;
-      place-items: center;
-      height: 100vh;
-    }
-    .mother-scene,
-    .scene {
-      perspective: 2000px;
-      width: 235px;
-      height: 200px;
-      transform: rotateX(-25deg) scale(0.9);
-    }
+.wall,
+.floor {
+  border: 1px solid black;
+}
+.room {
+  --room-width: 235px;
+  --room-height: 200px;
+  --room-depth: 190px;
+  width: var(--room-width);
+  height: var(--room-height);
+  position: relative;
+  transform: rotateY(var(--rotate-y));
+  /* animation: room 4s infinite; */
+}
 
-    .floor {
-      transform: rotateX(90deg) translateZ(calc(var(--room-depth) / -2));
-    }
-    .wall--back {
-      transform: rotateY(180deg) translateZ(calc(var(--room-depth) / 2));
-    }
-    .wall--left {
-      --box-width: 195px;
-      transform: rotateY(-90deg) translateZ(calc(var(--room-width) / 2 - 12px));
-    }
+.table__face--bottom,
+.table__face--top,
+.table__face--left,
+.table__face--right,
+.chair__face--bottom,
+.chair__face--top,
+.chair__face--left,
+.chair__face--right {
+  --direction: right;
+  --border: 1px;
+  --color: hsl(21, 84%, 43%);
+  background: transparent !important;
+  background-image: linear-gradient(
+    to var(--direction),
+    var(--color) 10%,
+    black 10%,
+    black 11%,
+    transparent 11%,
+    transparent 90%,
+    black 90%,
+    black 91%,
+    var(--color) 91%
+  ) !important;
+  border: var(--border) solid black;
+}
+.chair__face--bottom,
+.chair__face--top,
+.chair__face--left,
+.chair__face--right {
+  --border: 0.5px;
+  --color: hsl(21, 84%, 23%);
+}
+.table__face--left,
+.table__face--right,
+.chair__face--left,
+.chair__face--right {
+  --direction: bottom;
+}
+.table__face--front,
+.chair__face--front {
+  background: hsl(21, 84%, 83%);
+  border: 2px solid black;
+  transform: translateZ(calc(var(--depth) / 2));
+  display: grid;
+  place-items: center;
+}
+.chair__face--front {
+  background: hsl(21, 84%, 63%);
+}
+.table__face--back {
+  background: black;
+  filter: blur(1px);
+  transform: translateZ(-20px);
+}
+.box {
+  aspect-ratio: 10/9;
+  width: 60px;
+  background: black;
+  position: relative;
+  transform: translateZ(10px);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.5);
+  margin-top: -70px;
+  margin-left: -70px;
+}
+.box::before {
+  display: block;
+  content: "";
+  position: absolute;
+  background-color: #4158d0;
+  background-image: linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 46%,
+    #ffcc70 100%
+  );
 
-    .wall__face,
-    .floor__face,
-    .table__face,
-    .kitchen-set__face,
-    .stove__face,
-    .chair__face,
-    .fridge__face,
-    .washer__face,
-    .keran__face,
-    .keran-top__face,
-    .keran-right__face,
-    .keran-mancur__face {
-      width: var(--width, 100%);
-      height: var(--height, 100%);
+  filter: blur(10px);
+  inset: -10px;
+  z-index: -1;
+  transform: translateZ(-5px);
+}
 
-      position: absolute;
-    }
-    .floor__face--front {
-      background-image: linear-gradient(to bottom, transparent 95%, #59587e 95%),
-        linear-gradient(to right, #d2d2fa 95%, #59587e 95%);
-      background-size: calc(var(--box-width) / 5) calc(var(--box-height) / 5);
-      background-repeat: repeat;
-    }
+* {
+  transform-style: preserve-3d;
+}
+body {
+  background: white;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+.mother-scene,
+.scene {
+  perspective: 2000px;
+  width: 235px;
+  height: 200px;
+  transform: rotateX(var(--rotate-x)) scale(0.9);
+}
 
-    .wall__face--back,
-    .floor__face--back {
-      background: black;
-    }
-    .wall__face--front.wallpaper--curvy {
-      background-color: #e5e5f7;
-      background-image: linear-gradient(
-          135deg,
-          hsl(237, 92%, 42%) 25%,
-          transparent 25%
-        ),
-        linear-gradient(225deg, hsl(237, 70%, 42%) 25%, transparent 25%),
-        linear-gradient(45deg, hsl(237, 70%, 42%) 25%, transparent 25%),
-        linear-gradient(315deg, hsl(237, 70%, 42%) 25%, hsl(240, 53%, 73%) 25%);
-      background-position: 10px 0, 10px 0, 0 0, 0 0;
-      background-size: 10px 10px;
-      background-repeat: repeat;
-      -webkit-mask: radial-gradient(35px, #0000 98%, #000) 8px -45px;
-      mask:radial-gradient(35px, #0000 98%, #000) 8px -45px ;
-    }
-    .wall--back .wall__face--back {
-      -webkit-mask: radial-gradient(35px, #0000 98%, #000) -8px -45px;
-      mask: radial-gradient(35px, #0000 98%, #000) -8px -45px;
+.floor {
+  transform: rotateX(90deg) translateZ(calc(var(--room-depth) / -2));
+}
+.wall--back {
+  transform: rotateY(180deg) translateZ(calc(var(--room-depth) / 2));
+}
+.wall--left {
+  --box-width: 195px;
+  transform: rotateY(-90deg) translateZ(calc(var(--room-width) / 2 - 12px));
+}
 
-    }
-    .wall__face--front.wallpaper--transparent {
-      background: transparent;
-    }
-    .wall__face--front.wallpaper--checker {
-      background-color: #e5e5f7;
-      background-image: repeating-radial-gradient(
-          circle at 0 0,
-          transparent 0,
-          #e5e5f7 10px
-        ),
-        repeating-linear-gradient(#444cf755, #444cf7);
-      display: grid;
-      place-items: center;
-      box-shadow: inset 0 0 0 4px white;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+.wall__face,
+.floor__face,
+.table__face,
+.kitchen-set__face,
+.stove__face,
+.chair__face,
+.fridge__face,
+.washer__face,
+.keran__face,
+.keran-top__face,
+.keran-right__face,
+.keran-mancur__face {
+  width: var(--width, 100%);
+  height: var(--height, 100%);
 
-    .wall__face--top,
-    .wall__face--bottom,
-    .floor__face--top,
-    .floor__face--bottom,
-    .table__face--top,
-    .table__face--bottom,
-    .kitchen-set__face--bottom,
-    .stove__face--top,
-    .stove__face--bottom,
-    .chair__face--bottom,
-    .chair__face--top,
-    .fridge__face--top,
-    .fridge__face--bottom,
-    .washer__face--top,
-    .washer__face--bottom,
-    .keran__face--top,
-    .keran__face--bottom,
-    .keran-top__face--top,
-    .keran-top__face--bottom,
-    .keran-right__face--top,
-    .keran-right__face--bottom,
-    .keran-mancur__face--top,
-    .keran-mancur__face--bottom{
-      --height: var(--depth);
-      background: white;
-      top: calc(50% - (var(--depth) / 2));
-    }
-    .floor__face--front,
-    .wall__face--back,
-    .kitchen-set__face--front,
-    .stove__face--front,
-    .fridge__face--front,
-    .washer__face--front,
-    .keran__face--front,
-    .keran-top__face--front,
-    .keran-right__face--front,
-    .keran-mancur__face--front {
-      transform: translateZ(calc(var(--depth) / 2));
-    }
-    .floor__face--back {
-      transform: rotateY(180deg) translateZ(calc(var(--depth) / 2 + 15px));
-    }
-    .wall__face--front,
-    .stove__face--back,
-    .chair__face--back,
-    .fridge__face--back,
-    .washer__face--back,
-    .keran__face--back,
-    .keran-top__face--back,
-    .keran-right__face--back,
-    .keran-mancur__face--back {
-      transform: rotateY(180deg) translateZ(calc(var(--depth) / 2));
-    }
-    .wall__face--top,
-    .floor__face--top,
-    .table__face--top,
-    .stove__face--top,
-    .chair__face--top,
-    .fridge__face--top,
-    .washer__face--top,
-    .keran__face--top,
-    .keran-top__face--top,
-    .keran-right__face--top,
-    .keran-mancur__face--top {
-      transform: rotateX(90deg) translateZ(calc(var(--box-height) / 2));
-    }
-    .wall__face--bottom,
-    .floor__face--bottom,
-    .table__face--bottom,
-    .kitchen-set__face--bottom,
-    .stove__face--bottom,
-    .chair__face--bottom,
-    .fridge__face--bottom,
-    .washer__face--bottom,
-    .keran__face--bottom,
-    .keran-top__face--bottom,
-    .keran-right__face--bottom,
-    .keran-mancur__face--bottom {
-      transform: rotateX(-90deg) translateZ(calc(var(--box-height) / 2));
-    }
-    .wall__face--right,
-    .floor__face--right,
-    .table__face--right,
-    .kitchen-set__face--right,
-    .stove__face--right,
-    .chair__face--right,
-    .fridge__face--right,
-    .washer__face--right,
-    .keran__face--right,
-    .keran-top__face--right,
-    .keran-right__face--right,
-    .keran-mancur__face--right {
-      transform: rotateY(90deg) translateZ(calc(var(--box-width) / 2));
-    }
-    .chair__face--head {
-      background-image: linear-gradient(
-        to bottom,
-        hsl(21, 84%, 23%) 20%,
-        black 20%,
-        black 22%,
-        transparent 22%,
-        transparent 30%,
-        black 30%,
-        black 32%,
-        hsl(21, 84%, 23%) 32%,
-        hsl(21, 84%, 23%) 40%,
-        black 40%,
-        black 42%,
-        transparent 42%,
-        transparent 50%,
-        black 50%,
-        black 52%,
-        hsl(21, 84%, 23%) 52%,
-        hsl(21, 84%, 23%) 60%,
-        black 60%,
-        black 62%,
-        transparent 62%,
-        transparent 70%,
-        black 70%,
-        black 72%,
-        hsl(21, 84%, 23%) 72%
-      );
-      box-shadow: inset 0 0 0 5px hsl(21, 84%, 23%);
-      border: 1px solid black;
-      transform: rotateY(90deg) translateX(calc(var(--depth) * -1.17))
-        translateZ(calc(var(--box-width) / 2));
-    }
-    .wall__face--left,
-    .floor__face--left,
-    .table__face--left,
-    .stove__face--left,
-    .chair__face--left,
-    .fridge__face--left,
-    .washer__face--left,
-    .keran__face--left,
-    .keran-top__face--left,
-    .keran-right__face--left,
-    .keran-mancur__face--left{
-      transform: rotateY(-90deg) translateZ(calc(var(--box-width) / 2));
-    }
+  position: absolute;
+}
+.floor__face--front {
+  background-image: linear-gradient(to bottom, transparent 95%, #59587e 95%),
+    linear-gradient(to right, #d2d2fa 95%, #59587e 95%);
+  background-size: calc(var(--box-width) / 5) calc(var(--box-height) / 5);
+  background-repeat: repeat;
+}
 
-    .floor__face--right,
-    .floor__face--left,
-    .wall__face--right,
-    .wall__face--left,
-    .table__face--left,
-    .table__face--right,
-    .kitchen-set__face--right,
-    .stove__face--left,
-    .stove__face--right,
-    .chair__face--left,
-    .chair__face--right,
-    .fridge__face--left,
-    .fridge__face--right,
-    .washer__face--left,
-    .washer__face--right,
-    .keran__face--right,
-    .keran__face--left,
-    .keran-top__face--right,
-    .keran-top__face--left,
-    .keran-right__face--left,
-    .keran-right__face--right,
-    .keran-mancur__face--left,
-    .keran-mancur__face--right {
-      --width: var(--depth);
-      left: calc(50% - (var(--depth) / 2));
-      background: #59587e;
-    }
-    .chair__face--back.shadow{
-      background: black;
-      transform: rotateY(180deg) translateZ(calc(var(--depth) * 0.5));
-      filter: blur(1px);
-    }
-    @keyframes room {
-      0% {
-        transform: rotateY(-45deg) rotateX(-0deg);
-      }
+.wall__face--back,
+.floor__face--back {
+  background: black;
+}
+.wall__face--front.wallpaper--curvy {
+  background-color: #e5e5f7;
+  background-image: linear-gradient(
+      135deg,
+      hsl(237, 92%, 42%) 25%,
+      transparent 25%
+    ),
+    linear-gradient(225deg, hsl(237, 70%, 42%) 25%, transparent 25%),
+    linear-gradient(45deg, hsl(237, 70%, 42%) 25%, transparent 25%),
+    linear-gradient(315deg, hsl(237, 70%, 42%) 25%, hsl(240, 53%, 73%) 25%);
+  background-position: 10px 0, 10px 0, 0 0, 0 0;
+  background-size: 10px 10px;
+  background-repeat: repeat;
+  -webkit-mask: radial-gradient(35px, #0000 98%, #000) 8px -45px;
+  mask: radial-gradient(35px, #0000 98%, #000) 8px -45px;
+}
+.wall--back .wall__face--back {
+  -webkit-mask: radial-gradient(35px, #0000 98%, #000) -8px -45px;
+  mask: radial-gradient(35px, #0000 98%, #000) -8px -45px;
+}
+.wall__face--front.wallpaper--transparent {
+  background: transparent;
+}
+.wall__face--front.wallpaper--checker {
+  background-color: #e5e5f7;
+  background-image: repeating-radial-gradient(
+      circle at 0 0,
+      transparent 0,
+      #e5e5f7 10px
+    ),
+    repeating-linear-gradient(#444cf755, #444cf7);
+  display: grid;
+  place-items: center;
+  box-shadow: inset 0 0 0 4px white;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-      100% {
-        transform: rotateY(calc(-360deg - 45deg)) rotateX(-0deg);
-      }
-    }
+.wall__face--top,
+.wall__face--bottom,
+.floor__face--top,
+.floor__face--bottom,
+.table__face--top,
+.table__face--bottom,
+.kitchen-set__face--bottom,
+.stove__face--top,
+.stove__face--bottom,
+.chair__face--bottom,
+.chair__face--top,
+.fridge__face--top,
+.fridge__face--bottom,
+.washer__face--top,
+.washer__face--bottom,
+.keran__face--top,
+.keran__face--bottom,
+.keran-top__face--top,
+.keran-top__face--bottom,
+.keran-right__face--top,
+.keran-right__face--bottom,
+.keran-mancur__face--top,
+.keran-mancur__face--bottom {
+  --height: var(--depth);
+  background: white;
+  top: calc(50% - (var(--depth) / 2));
+}
+.floor__face--front,
+.wall__face--back,
+.kitchen-set__face--front,
+.stove__face--front,
+.fridge__face--front,
+.washer__face--front,
+.keran__face--front,
+.keran-top__face--front,
+.keran-right__face--front,
+.keran-mancur__face--front {
+  transform: translateZ(calc(var(--depth) / 2));
+}
+.floor__face--back {
+  transform: rotateY(180deg) translateZ(calc(var(--depth) / 2 + 15px));
+}
+.wall__face--front,
+.stove__face--back,
+.chair__face--back,
+.fridge__face--back,
+.washer__face--back,
+.keran__face--back,
+.keran-top__face--back,
+.keran-right__face--back,
+.keran-mancur__face--back {
+  transform: rotateY(180deg) translateZ(calc(var(--depth) / 2));
+}
+.wall__face--top,
+.floor__face--top,
+.table__face--top,
+.stove__face--top,
+.chair__face--top,
+.fridge__face--top,
+.washer__face--top,
+.keran__face--top,
+.keran-top__face--top,
+.keran-right__face--top,
+.keran-mancur__face--top {
+  transform: rotateX(90deg) translateZ(calc(var(--box-height) / 2));
+}
+.wall__face--bottom,
+.floor__face--bottom,
+.table__face--bottom,
+.kitchen-set__face--bottom,
+.stove__face--bottom,
+.chair__face--bottom,
+.fridge__face--bottom,
+.washer__face--bottom,
+.keran__face--bottom,
+.keran-top__face--bottom,
+.keran-right__face--bottom,
+.keran-mancur__face--bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--box-height) / 2));
+}
+.wall__face--right,
+.floor__face--right,
+.table__face--right,
+.kitchen-set__face--right,
+.stove__face--right,
+.chair__face--right,
+.fridge__face--right,
+.washer__face--right,
+.keran__face--right,
+.keran-top__face--right,
+.keran-right__face--right,
+.keran-mancur__face--right {
+  transform: rotateY(90deg) translateZ(calc(var(--box-width) / 2));
+}
+.chair__face--head {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(21, 84%, 23%) 20%,
+    black 20%,
+    black 22%,
+    transparent 22%,
+    transparent 30%,
+    black 30%,
+    black 32%,
+    hsl(21, 84%, 23%) 32%,
+    hsl(21, 84%, 23%) 40%,
+    black 40%,
+    black 42%,
+    transparent 42%,
+    transparent 50%,
+    black 50%,
+    black 52%,
+    hsl(21, 84%, 23%) 52%,
+    hsl(21, 84%, 23%) 60%,
+    black 60%,
+    black 62%,
+    transparent 62%,
+    transparent 70%,
+    black 70%,
+    black 72%,
+    hsl(21, 84%, 23%) 72%
+  );
+  box-shadow: inset 0 0 0 5px hsl(21, 84%, 23%);
+  border: 1px solid black;
+  transform: rotateY(90deg) translateX(calc(var(--depth) * -1.17))
+    translateZ(calc(var(--box-width) / 2));
+}
+.wall__face--left,
+.floor__face--left,
+.table__face--left,
+.stove__face--left,
+.chair__face--left,
+.fridge__face--left,
+.washer__face--left,
+.keran__face--left,
+.keran-top__face--left,
+.keran-right__face--left,
+.keran-mancur__face--left {
+  transform: rotateY(-90deg) translateZ(calc(var(--box-width) / 2));
+}
+
+.floor__face--right,
+.floor__face--left,
+.wall__face--right,
+.wall__face--left,
+.table__face--left,
+.table__face--right,
+.kitchen-set__face--right,
+.stove__face--left,
+.stove__face--right,
+.chair__face--left,
+.chair__face--right,
+.fridge__face--left,
+.fridge__face--right,
+.washer__face--left,
+.washer__face--right,
+.keran__face--right,
+.keran__face--left,
+.keran-top__face--right,
+.keran-top__face--left,
+.keran-right__face--left,
+.keran-right__face--right,
+.keran-mancur__face--left,
+.keran-mancur__face--right {
+  --width: var(--depth);
+  left: calc(50% - (var(--depth) / 2));
+  background: #59587e;
+}
+.chair__face--back.shadow {
+  background: black;
+  transform: rotateY(180deg) translateZ(calc(var(--depth) * 0.5));
+  filter: blur(1px);
+}
+@keyframes room {
+  0% {
+    transform: rotateY(-45deg) rotateX(-0deg);
+  }
+
+  100% {
+    transform: rotateY(calc(-360deg - 45deg)) rotateX(-0deg);
+  }
+}

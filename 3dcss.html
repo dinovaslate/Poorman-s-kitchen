@@ -2,7 +2,10 @@
   <link rel="stylesheet" href="3dcss.css" />
 </head>
 <body>
-  <div class="viewport">
+  <div
+    class="viewport"
+    style="--rotate-y: -45deg; --rotate-x: -25deg; --scale: 2"
+  >
     <div class="scene">
       <div class="room">
         <div class="floor">
@@ -168,4 +171,64 @@
       </div>
     </div>
   </div>
+  <div class="button">Rotate</div>
+  <div class="prompt">
+    <label>Rotate Y</label><br />
+    <input
+      type="range"
+      min="0"
+      max="360"
+      value="315"
+      class="slider"
+      id="myRange"
+      style="--value: 87.5%"
+      name="y"
+      oninput="changeval(event)"
+    /><br />
+    <label>Rotate X</label><br />
+    <input
+      type="range"
+      min="0"
+      max="360"
+      value="335"
+      class="slider"
+      id="myRange"
+      style="--value: 93.05%"
+      name="x"
+      oninput="changeval(event)"
+    /><br />
+    <label>Scale</label><br />
+    <input
+      type="range"
+      min="0"
+      max="100"
+      value="20"
+      class="slider"
+      id="myRange"
+      style="--value: 20%"
+      name="scale"
+      oninput="changeval(event)"
+    />
+  </div>
+  <script>
+    const changeval = (e) => {
+      const input = e.currentTarget;
+      const value =
+        input.name === "scale"
+          ? parseInt(input.value) / 10
+          : parseInt(input.value);
+      const valueToAdd =
+        input.name === "scale" ? value * 10 : (value / 360) * 100;
+      const viewport = document.querySelector(".viewport");
+      const toChange =
+        input.name === "y"
+          ? "--rotate-y"
+          : input.name === "x"
+          ? "--rotate-x"
+          : "--scale";
+      const satuan = input.name === "scale" ? "" : "deg";
+      viewport.style.setProperty(toChange, `${value}${satuan}`);
+      input.style.setProperty("--value", `${valueToAdd}%`);
+    };
+  </script>
 </body>
